@@ -1,16 +1,69 @@
-	function fileSort() {
-    	alert('sort');
-        GetCellValues();
-    };
-    
-    function sizeSort() {
-    	alert('size');
-    };
-    
-    function GetCellValues() {
-    var table = document.getElementById('mytable');
-    for (var r = 0, n = table.rows.length; r < n; r++) {
-        for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-            alert(table.rows[r].cells[c].innerHTML);
-        }
-    };
+var table = document.getElementById('mytable');
+var tableRowsLength = table.rows.length;
+var rawData = [];
+var sortUpName = false;
+var sortUpDate = false;
+var sortUpSize = false;
+
+
+function tableRow(fileName, fileSize, fileDate) {
+    this.fileName = fileName;
+    this.fileSize = fileSize;
+    this.fileDate = fileDate;
+}
+
+function getCellValues() {
+    var i = 0;
+    for (var r = 1; r < tableRowsLength; r++) {
+        rawData[i] = new tableRow(table.rows[r].cells[0].innerHTML,
+            table.rows[r].cells[1].innerHTML,
+            table.rows[r].cells[2].innerHTML);
+        i++;
+    }
+}
+
+function rbTable() {
+    var i = 0;
+    for (var r = 1; r < tableRowsLength; r++) {
+        table.rows[r].cells[0].innerHTML = rawData[i].fileName;
+        table.rows[r].cells[1].innerHTML = rawData[i].fileSize;
+        table.rows[r].cells[2].innerHTML = rawData[i].fileDate;
+        i++;
+    }
+}
+
+function sortTable(var columnName) {
+    getCellValues();
+    switch (columnName) {
+        case "fileName":
+            rawData.sort(function(a, b) {
+                if (sortUpName = !sortUpName) {
+                    return a.fileName.localeCompare(b.fileName);
+                } else {
+                    return b.fileName.localeCompare(a.fileName);
+                }
+            });
+
+            break;
+        case "fileSize":
+            rawData.sort(function(a, b) {
+                if (sortUpSize = !sortUpSize) {
+                    return a.fileSize - b.fileSize;
+                } else {
+                    return b.fileSize - a.fileSize;
+                }
+            });
+            break;
+        case "fileDate":
+            rawData.sort(function(a, b) {
+                if (sortUpDate = !sortUpDate) {
+                    return a.fileDate.localeCompare(b.fileDate);
+                } else {
+                    return b.fileDate.localeCompare(a.fileDate);
+                }
+            });
+
+            break;
+    }
+    rbTable();
+}
