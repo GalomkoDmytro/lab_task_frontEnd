@@ -32,7 +32,8 @@ function rbTable() {
     }
 }
 
-function sortTable(var columnName) {
+function sortTable( columnName) {
+  
     getCellValues();
     switch (columnName) {
         case "fileName":
@@ -67,3 +68,6 @@ function sortTable(var columnName) {
     }
     rbTable();
 }
+
+
+                  
