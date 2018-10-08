@@ -33,37 +33,39 @@ function rbTable() {
 }
 
 function sortTable( columnName) {
-  
     getCellValues();
     switch (columnName) {
         case "fileName":
             rawData.sort(function(a, b) {
-                if (sortUpName = !sortUpName) {
+                if (sortUpName) {
                     return a.fileName.localeCompare(b.fileName);
                 } else {
                     return b.fileName.localeCompare(a.fileName);
                 }
             });
-
+            sortUpName = !sortUpName;
             break;
+            
         case "fileSize":
             rawData.sort(function(a, b) {
-                if (sortUpSize = !sortUpSize) {
+                if (sortUpSize) {
                     return a.fileSize - b.fileSize;
                 } else {
                     return b.fileSize - a.fileSize;
                 }
             });
+            sortUpSize = !sortUpSize
             break;
+                
         case "fileDate":
             rawData.sort(function(a, b) {
-                if (sortUpDate = !sortUpDate) {
+                if (sortUpDate) {
                     return a.fileDate.localeCompare(b.fileDate);
                 } else {
                     return b.fileDate.localeCompare(a.fileDate);
                 }
             });
-
+            sortUpDate = !sortUpDate;
             break;
     }
     rbTable();
